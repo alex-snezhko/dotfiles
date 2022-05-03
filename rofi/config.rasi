@@ -1,231 +1,135 @@
+// Adapted from colorful theme 7 of https://github.com/adi1090x/rofi
+
 configuration {
-/*	modi: "window,run,ssh";*/
-	font: "Source Code Pro 12";
-/*	location: 0;*/
-/*	yoffset: 0;*/
-/*	xoffset: 0;*/
-/*	fixed-num-lines: true;*/
-	show-icons: true;
-	terminal: "alacritty";
-/*	ssh-client: "ssh";*/
-/*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
-/*	run-command: "{cmd}";*/
-/*	run-list-command: "";*/
-/*	run-shell-command: "{terminal} -e {cmd}";*/
-/*	window-command: "wmctrl -i -R {window}";*/
-/*	window-match-fields: "all";*/
-/*	icon-theme: ;*/
-/*	drun-match-fields: "name,generic,exec,categories,keywords";*/
-/*	drun-categories: ;*/
-/*	drun-show-actions: false;*/
-/*	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";*/
-/*	drun-url-launcher: "xdg-open";*/
-/*	disable-history: false;*/
-/*	ignored-prefixes: "";*/
-/*	sort: false;*/
-/*	sorting-method: "normal";*/
-/*	case-sensitive: false;*/
-/*	cycle: true;*/
-/*	sidebar-mode: false;*/
-/*	hover-select: false;*/
-/*	eh: 1;*/
-/*	auto-select: false;*/
-/*	parse-hosts: false;*/
-/*	parse-known-hosts: true;*/
-/*	combi-modi: "window,run";*/
-/*	matching: "normal";*/
-/*	tokenize: true;*/
-/*	m: "-5";*/
-/*	filter: ;*/
-/*	dpi: -1;*/
-/*	threads: 0;*/
-/*	scroll-method: 0;*/
-/*	window-format: "{w}    {c}   {t}";*/
-/*	click-to-exit: true;*/
-/*	max-history-size: 25;*/
-/*	combi-hide-mode-prefix: false;*/
-/*	combi-display-format: "{mode} {text}";*/
-/*	matching-negate-char: '-' /* unsupported */;*/
-/*	cache-dir: ;*/
-/*	window-thumbnail: false;*/
-/*	drun-use-desktop-cache: false;*/
-/*	drun-reload-desktop-cache: false;*/
-/*	normalize-match: false;*/
-/*	steal-focus: false;*/
-/*	application-fallback-icon: ;*/
-/*	pid: "/run/user/1000/rofi.pid";*/
-/*	display-window: ;*/
-/*	display-windowcd: ;*/
-/*	display-run: ;*/
-/*	display-ssh: ;*/
-/*	display-drun: ;*/
-/*	display-combi: ;*/
-/*	display-keys: ;*/
-/*	display-filebrowser: ;*/
-/*	kb-primary-paste: "Control+V,Shift+Insert";*/
-/*	kb-secondary-paste: "Control+v,Insert";*/
-/*	kb-clear-line: "Control+w";*/
-/*	kb-move-front: "Control+a";*/
-/*	kb-move-end: "Control+e";*/
-/*	kb-move-word-back: "Alt+b,Control+Left";*/
-/*	kb-move-word-forward: "Alt+f,Control+Right";*/
-/*	kb-move-char-back: "Left,Control+b";*/
-/*	kb-move-char-forward: "Right,Control+f";*/
-/*	kb-remove-word-back: "Control+Alt+h,Control+BackSpace";*/
-/*	kb-remove-word-forward: "Control+Alt+d";*/
-/*	kb-remove-char-forward: "Delete,Control+d";*/
-/*	kb-remove-char-back: "BackSpace,Shift+BackSpace,Control+h";*/
-/*	kb-remove-to-eol: "Control+k";*/
-/*	kb-remove-to-sol: "Control+u";*/
-/*	kb-accept-entry: "Control+j,Control+m,Return,KP_Enter";*/
-/*	kb-accept-custom: "Control+Return";*/
-/*	kb-accept-custom-alt: "Control+Shift+Return";*/
-/*	kb-accept-alt: "Shift+Return";*/
-/*	kb-delete-entry: "Shift+Delete";*/
-/*	kb-mode-next: "Shift+Right,Control+Tab";*/
-/*	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";*/
-/*	kb-mode-complete: "Control+l";*/
-/*	kb-row-left: "Control+Page_Up";*/
-/*	kb-row-right: "Control+Page_Down";*/
-/*	kb-row-up: "Up,Control+p,ISO_Left_Tab";*/
-/*	kb-row-down: "Down,Control+n";*/
-/*	kb-row-tab: "Tab";*/
-/*	kb-page-prev: "Page_Up";*/
-/*	kb-page-next: "Page_Down";*/
-/*	kb-row-first: "Home,KP_Home";*/
-/*	kb-row-last: "End,KP_End";*/
-/*	kb-row-select: "Control+space";*/
-/*	kb-screenshot: "Alt+S";*/
-/*	kb-ellipsize: "Alt+period";*/
-/*	kb-toggle-case-sensitivity: "grave,dead_grave";*/
-/*	kb-toggle-sort: "Alt+grave";*/
-/*	kb-cancel: "Escape,Control+g,Control+bracketleft";*/
-/*	kb-custom-1: "Alt+1";*/
-/*	kb-custom-2: "Alt+2";*/
-/*	kb-custom-3: "Alt+3";*/
-/*	kb-custom-4: "Alt+4";*/
-/*	kb-custom-5: "Alt+5";*/
-/*	kb-custom-6: "Alt+6";*/
-/*	kb-custom-7: "Alt+7";*/
-/*	kb-custom-8: "Alt+8";*/
-/*	kb-custom-9: "Alt+9";*/
-/*	kb-custom-10: "Alt+0";*/
-/*	kb-custom-11: "Alt+exclam";*/
-/*	kb-custom-12: "Alt+at";*/
-/*	kb-custom-13: "Alt+numbersign";*/
-/*	kb-custom-14: "Alt+dollar";*/
-/*	kb-custom-15: "Alt+percent";*/
-/*	kb-custom-16: "Alt+dead_circumflex";*/
-/*	kb-custom-17: "Alt+ampersand";*/
-/*	kb-custom-18: "Alt+asterisk";*/
-/*	kb-custom-19: "Alt+parenleft";*/
-/*	kb-select-1: "Super+1";*/
-/*	kb-select-2: "Super+2";*/
-/*	kb-select-3: "Super+3";*/
-/*	kb-select-4: "Super+4";*/
-/*	kb-select-5: "Super+5";*/
-/*	kb-select-6: "Super+6";*/
-/*	kb-select-7: "Super+7";*/
-/*	kb-select-8: "Super+8";*/
-/*	kb-select-9: "Super+9";*/
-/*	kb-select-10: "Super+0";*/
-/*	ml-row-left: "ScrollLeft";*/
-/*	ml-row-right: "ScrollRight";*/
-/*	ml-row-up: "ScrollUp";*/
-/*	ml-row-down: "ScrollDown";*/
-/*	me-select-entry: "MousePrimary";*/
-/*	me-accept-entry: "MouseDPrimary";*/
-/*	me-accept-custom: "Control+MouseDPrimary";*/
+/*  modi: "window,run,ssh";*/
+  //font: "Source Code Pro 12";
+  font: "JetBrains Mono Nerd Font 12";
+  show-icons: true;
+  icon-theme:           "Papirus";
+  terminal: "alacritty";
+  display-drun:           "";
+  drun-display-format:            "{name}";
+  disable-history:                false;
+  sidebar-mode:           false;
+
   timeout {
-      action: "kb-cancel";
-      delay:  0;
+    action: "kb-cancel";
+    delay:  0;
   }
+
   filebrowser {
-      directories-first: true;
-      sorting-method:    "name";
+    directories-first: true;
+    sorting-method:    "name";
   }
 }
 
 * {
-  text-color: #fff;
+  al:  #00000000;
+  bg:  #232426;
+  fg:  #FFFFFFff;
+  primary-color: #5199cc;
 }
 
 window {
-  padding: 14px;
-  transparency: "screenshot";
-  border: 1px;
-  border-color: #000000;
-  border-radius: 10px;
-  background-color: #242424;
-  width: 40em;
+  transparency:                   "screenshot";
+  background-color:               @bg;
+  text-color:                     @fg;
+  border:              0px;
+  border-radius:                  10px;
+  width:              30%;
+  location:                       center;
+  x-offset:                       0;
+  y-offset:                       0;
+  padding: 0;
 }
 
 mainbox {
-  children: [ inputbar, listview ];
+  background-color:               @al;
+  children:                       [ inputbar, listview ];
+  spacing:                        0%;
+  padding:                        0%;
 }
 
 inputbar {
-  children: [ entry, num-filtered-rows ];
-  border: 0px;
-}
-
-prompt-colon {
-  text-color: #fff;
+  children:             [ prompt, entry ];
+  background-color:               @primary-color;
+  text-color:                     @fg;
+  expand:                         false;
+  margin:                         0% 0% 0% 0%;
+  padding:                        1.5%;
 }
 
 prompt {
-  text-color: #fff;
+  enabled:             true;
+  padding:             0.30% 1% 0% -0.5%;
+  background-color:         @al;
+  text-color:           @fg;
+  font:              "FantasqueSansMono Nerd Font 12";
 }
 
 entry {
-  text-color: #fff;
-}
-
-num-filtered-rows {
-  text-color: #3584e4;
-}
-
-scrollbar {
-  background-color: #303030;
-  handle-color: #5d5d5d;
+  background-color:               @al;
+  text-color:                     @fg;
+  placeholder-color:              @fg;
+  expand:                         true;
+  horizontal-align:               0;
+  placeholder:                    "Search";
+  padding:                        0.10% 0% 0% 0%;
+  blink:                          true;
 }
 
 listview {
-  padding: 10px 0px 0px 0px;
-  border: 0px;
-  lines: 10;
+  background-color:               @al;
+  border:                         0;
+  padding:                        12px;
+  columns:                        2;
+  lines:                          7;
+  spacing:                        0.5%;
+  cycle:                          false;
+  dynamic:                        true;
+  layout:                         vertical;
+  scrollbar:                      false;
 }
 
 element {
-  orientation: horizontal;
-  children: [ element-icon, element-text ];
-  spacing: 10px;
-  border-radius: 4px;
-  text-color: #ffffff;
+  background-color:               @al;
+  text-color:                     @fg;
+  orientation:                    horizontal;
+  border-radius:                  4px;
+  margin: 0.25% 0% 0.25% 0%;
+  padding:                        1% 0.5% 1% 0.5%;
 }
 
 element normal normal {
-  background-color: #303030;
-  text-color: #ffffff;
-}
-
-listview {
-  spacing: 4px;
+  background-color:               #2c2d30;
+  text-color:                     @fg;
 }
 
 element alternate normal {
-  background-color: #404040;
-  text-color: #ffffff;
+  background-color:               #2c2d30;
+  text-color:                     @fg;
 }
 
-element-text {
-  vertical-align: 0.5;
-}
-
-element {
-  padding: 6px;
+element selected {
+  background-color:               #65959e;
+  text-color:                     @bg;
+  border-radius:                  4px;
 }
 
 element-icon {
-  size: 1.5em;
+  background-color:         inherit;
+  text-color:               inherit;
+  horizontal-align:               0.5;
+  vertical-align:                 0.5;
+  size:                           24px;
+  border:                         0px;
+}
+
+element-text {
+  background-color:         @al;
+  text-color:               inherit;
+  expand:                         true;
+  horizontal-align:               0;
+  vertical-align:                 0.5;
+  margin:                         0% 0.25% 0% 0.25%;
 }
