@@ -58,5 +58,5 @@ if [ -n "$weather" ]; then
     weather_temp=$(echo "$weather" | jq ".main.temp" | cut -d "." -f 1)
     weather_icon=$(echo "$weather" | jq -r ".weather[0].icon")
 
-    echo "%{F#52a2da}$(get_icon "$weather_icon")%{F-}" "%{T1}$weather_temp°%{T-}"
+    echo "<span rise=\"-1pt\" font_size=\"12pt\" font_family=\"Weather Icons\">$(get_icon "$weather_icon") </span>$weather_temp°"
 fi
