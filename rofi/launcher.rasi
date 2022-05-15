@@ -28,7 +28,7 @@ configuration {
   fg:  #eeeeee;
   accent-color-1: #387bab;
   //accent-color-1: #5d89ba;
-  accent-color-2: #65959e;
+  accent-color-2: #709493;
   //accent-color-2: #4b9cd6;
 }
 

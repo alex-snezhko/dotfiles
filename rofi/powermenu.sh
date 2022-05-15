@@ -20,7 +20,7 @@ case $chosen in
         systemctl reboot
         ;;
     $lock)
-        swaylock
+        swaylock -i $HOME/.config/sway/wallpaper.png
         ;;
     $logout)
         swaymsg exit

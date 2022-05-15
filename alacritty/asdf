@@ -25,8 +25,7 @@ window:
 # Font configuration
 font:
   normal:
-    # family: 'Source Code Pro'
-    family: 'JetBrains Mono'
+    family: Source Code Pro
 
 colors:
   primary:

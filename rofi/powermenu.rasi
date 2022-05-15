@@ -2,7 +2,8 @@
 
 * {
     background:                     #232426;
-    background-alt:                 #2c2d30;
+    //background-alt:                 #2c2d30;
+    background-alt:                 #303135;
     foreground:                     #eeeeee;
     selected:               		#387bab;
     urgent:                         #DA4453;

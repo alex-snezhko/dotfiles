@@ -9,7 +9,7 @@
     "modules-center": ["sway/window"],
     "modules-right": ["custom/weather", "pulseaudio", "network", "keyboard-state", "battery", "clock"],
     "custom/startmenu": {
-        "format": "<span font_size=\"18pt\" font_family=\"Font Awesome 6 Free Solid\"></span>",
+        "format": "<span font_size=\"18pt\" font_family=\"Font Awesome 6 Brands\"></span>",
         "on-click": "$HOME/.config/rofi/powermenu.sh"
     },
     // Modules configuration
@@ -57,7 +57,7 @@
     "sway/window": {
         "max-length": 80,
         "rewrite": {
-            "(.*)— Mozilla Firefox": "<span color=\"#d76e00\"></span>   $1",
+            "(.*)— Mozilla Firefox": "<span color=\"#d76e00\" font_family=\"Font Awesome 6 Brands\"></span>   $1",
             "(.*) - Visual Studio Code": "<span color=\"#0098FF\"></span>   $1"
         }
     },
@@ -68,7 +68,7 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "<span font_family=\"Font Awesome 6 Free Solid\">{icon} </span>{volume}%",
+        "format": "<span color=\"#52a2da\" font_family=\"Font Awesome 6 Free Solid\">{icon} </span>{volume}%",
         "format-bluetooth": "{volume}% {icon}",
         "format-bluetooth-muted": " {icon}",
         "format-muted": "",
@@ -85,7 +85,7 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "<span font_family=\"Font Awesome 6 Free Solid\"> </span>{essid}",
+        "format-wifi": "<span color=\"#52a2da\" font_family=\"Font Awesome 6 Free Solid\"> </span>{essid}",
         "format-ethernet": " {ipaddr}/{cidr}",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
@@ -98,7 +98,7 @@
             "warning": 20,
             "critical": 5
         },
-        "format": "<span rise=\"-1pt\" font_size=\"12pt\" font_family=\"Font Awesome 6 Free Solid\">{icon} </span>{capacity}%",
+        "format": "<span color=\"#52a2da\" rise=\"-1pt\" font_size=\"12pt\" font_family=\"Font Awesome 6 Free Solid\">{icon} </span>{capacity}%",
         "format-charging": "<span rise=\"-1pt\" font_size=\"12pt\" font_family=\"Font Awesome 6 Free Solid\"> </span>{capacity}%",
         "format-plugged": "<span rise=\"-1pt\" font_size=\"12pt\" font_family=\"Font Awesome 6 Free Solid\"> </span>{capacity}%",
         // "format-good": "", // An empty format will hide the module

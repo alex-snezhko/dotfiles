@@ -10,7 +10,7 @@ set $mod Mod4
 
 ### Output configuration
 #
-output * bg $HOME/.config/sway/background.png fill
+output * bg $HOME/.config/sway/wallpaper.png fill
 #
 # Example configuration:
 #
@@ -22,11 +22,11 @@ output * bg $HOME/.config/sway/background.png fill
 #
 # Example configuration:
 #
-# lock after 600 seconds of inactivity, turn off display after 900
+# lock after 900 seconds of inactivity, turn off display after 1200
 exec swayidle -w \
-         timeout 600 'swaylock -f -c 000000' \
-         timeout 900 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
+         timeout 900 'swaylock -f -i $HOME/.config/sway/wallpaper.png' \
+         timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -i $HOME/.config/sway/wallpaper.png'
 
 ### Input configuration
 #
@@ -45,6 +45,8 @@ input type:touchpad {
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
+
+font pango:Cantarell 10
 
 ### Key bindings
 #
@@ -79,8 +81,6 @@ floating_modifier $mod normal
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
-
-bindsym $mod+Shift+r restart
 
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
@@ -199,11 +199,14 @@ bindsym $mod+Ctrl+Mod1+Down resize shrink up 10 px or 10 ppt
 bindsym $mod+Ctrl+Mod1+Up resize shrink down 10 px or 10 ppt
 bindsym $mod+Ctrl+Mod1+Right resize shrink left 10 px or 10 ppt
 
-client.focused #1662fa #164666 #ffffff #567394 #387bab
+# client.focused #1662fa #164666 #ffffff #567394 #387bab
+client.focused #387bab #3a3b3f #eeeeee #8fbcbb #387bab
+
+titlebar_border_thickness 2
 
 bar swaybar_command waybar
 
-default_border pixel 3
+default_border pixel 2
 # smart_gaps on
 # smart_borders on
 gaps inner 8
