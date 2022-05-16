@@ -24,7 +24,7 @@ get_icon() {
     echo $icon
 }
 
-KEY="11a1216af42fd506832162b8f2a8f114"
+KEY=""
 
 API="https://api.openweathermap.org/data/2.5"
 
