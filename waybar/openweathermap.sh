@@ -24,7 +24,7 @@ get_icon() {
     echo $icon
 }
 
-KEY=""
+KEY="4349c66c00ef2cc433b2c3cb8b95aac2"
 
 API="https://api.openweathermap.org/data/2.5"
 
@@ -41,5 +41,5 @@ if [ -n "$weather" ]; then
     weather_temp=$(echo "$weather" | jq ".main.temp" | cut -d "." -f 1)
     weather_icon=$(echo "$weather" | jq -r ".weather[0].icon")
 
-    echo "$(get_icon "$weather_icon")  $weather_temp°"
+    echo "<span color=\"#52a2da\" font_family=\"Font Awesome 6 Free Solid\">$(get_icon "$weather_icon") </span>$weather_temp°"
 fi
