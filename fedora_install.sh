@@ -20,7 +20,7 @@ echo 'Input your OpenWeatherMap API key.'
 read -p 'API Key: ' apikey
 
 # keep a record of packages needed to be installed
-to_install='alacritty fish rofi pavucontrol brightnessctl playerctl jetbrains-mono-fonts'
+to_install='alacritty fish rofi pulseaudio-utils pavucontrol brightnessctl playerctl jetbrains-mono-fonts'
 # directories from repo that should be copied to .config
 to_copy='alacritty rofi'
 
