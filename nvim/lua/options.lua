@@ -2,15 +2,14 @@ local opt = vim.opt
 
 -- [[ Context ]]
 opt.number = true                -- bool: Show line numbers
-opt.scrolloff = 5                -- int:  Min num lines of context
--- opt.signcolumn = "yes"           -- str:  Show the sign column
+opt.scrolloff = 8                -- int:  Min num lines of context
 
 -- [[ Filetypes ]]
 opt.encoding = 'utf8'            -- str:  String encoding to use
 opt.fileencoding = 'utf8'        -- str:  File encoding to use
 
 -- [[ Theme ]]
-opt.syntax = "ON"                -- str:  Allow syntax highlighting
+-- opt.syntax = "ON"                -- str:  Allow syntax highlighting
 opt.termguicolors = true         -- bool: If term supports ui color then enable
 
 -- [[ Search ]]
@@ -28,3 +27,11 @@ opt.tabstop = 4                  -- num:  Number of spaces tabs count for
 -- [[ Splits ]]
 opt.splitright = true            -- bool: Place new window to right of current one
 opt.splitbelow = true            -- bool: Place new window below the current one
+
+-- [[ Misc ]]
+opt.shell = "fish"
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = "*",
+  command = "setlocal formatoptions-=cro"
+})
+

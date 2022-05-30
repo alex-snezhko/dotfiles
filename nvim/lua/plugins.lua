@@ -11,17 +11,23 @@ return require('packer').startup(function(use)
     'williamboman/nvim-lsp-installer',
     'neovim/nvim-lspconfig'
   }
-  use 'kyazdani42/nvim-web-devicons'
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
-  use {
-    'numToStr/Comment.nvim',
-    config = function()
-      require('Comment').setup()
-    end
-  }
+  -- [[ nvim-cmp setup ]]
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use 'hrsh7th/nvim-cmp'
+  use 'L3MON4D3/LuaSnip'
+  use 'saadparwaiz1/cmp_luasnip'
+
+  use 'kyazdani42/nvim-web-devicons'
+  use 'tpope/vim-commentary'
+  -- use 'sbdchd/neoformat'
+  use 'karb94/neoscroll.nvim'
   use {
     "folke/which-key.nvim",
     config = function()
@@ -30,6 +36,27 @@ return require('packer').startup(function(use)
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
       }
+    end
+  }
+  use {
+    'folke/trouble.nvim',
+    config = function()
+      require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+  use 'windwp/nvim-autopairs'
+  use 'windwp/nvim-ts-autotag'
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v1', -- optional but strongly recommended
+    config = function()
+      -- you can configure Hop the way you like here; see :h hop-config
+      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
     end
   }
   use 'RRethy/vim-illuminate'
@@ -41,10 +68,12 @@ return require('packer').startup(function(use)
       require("toggleterm").setup()
     end
   }
-  use {                                              -- filesystem navigation
-    'kyazdani42/nvim-tree.lua',
-    -- requires = 'kyazdani42/nvim-web-devicons'        -- filesystem icons
-  }
+  use 'kyazdani42/nvim-tree.lua'
+  -- use {
+  --   'ms-jpq/chadtree',
+  --   branch = 'chad',
+  --   run = 'python3 -m chadtree deps --nvim'
+  -- }
   use 'DanilaMihailov/beacon.nvim'               -- cursor jump
   use {
     'nvim-lualine/lualine.nvim',                     -- statusline
@@ -55,10 +84,10 @@ return require('packer').startup(function(use)
     requires = { {'nvim-lua/plenary.nvim'} }
   }
   use "lukas-reineke/indent-blankline.nvim"
-  -- use 'fratajczak/one-monokai-vim'
   use 'sainnhe/sonokai'
 
   if packer_bootstrap then
     require('packer').sync()
   end
 end)
+

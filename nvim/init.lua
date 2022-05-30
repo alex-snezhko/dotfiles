@@ -1,29 +1,92 @@
 vim.g.mapleader = " "
 
-local map = vim.api.nvim_set_keymap
-
--- Toggle nvim-tree
-map('n', '<leader>p', ":NvimTreeToggle<CR>", { noremap = true })
-map('n', '<leader>f', ':Telescope find_files<CR>', { noremap = true })
-
-function _G.set_terminal_keymaps()
-  map('t', '<esc>', [[<C-\><C-n>]], { noremap = true })
-  map('t', '<C-h>', [[<C-\><C-n><C-W>h]], { noremap = true })
-  map('t', '<C-j>', [[<C-\><C-n><C-W>j]], { noremap = true })
-  map('t', '<C-k>', [[<C-\><C-n><C-W>k]], { noremap = true })
-  map('t', '<C-l>', [[<C-\><C-n><C-W>l]], { noremap = true })
-end
-
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-
 local packer_path = vim.fn.stdpath('config') .. '/site'
 vim.o.packpath = vim.o.packpath .. ',' .. packer_path
 
+require("keybinds")
 require("options")
 require("plugins")
+require("lsp")
 
-require('nvim-tree').setup{}
+require("neoscroll").setup {}
+require("nvim-autopairs").setup({
+  disable_filetype = { "TelescopePrompt", "vim" }
+})
+require("nvim-treesitter.configs").setup {
+  ensure_installed = "all",
+  highlight = {
+    enable = true,
+    -- additional_vim_regex_highlighting = true
+  },
+  autotag = {
+    enable = true
+  },
+  context_commentstring = {
+    enable = true
+  }
+}
+local cmp = require'cmp'
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' }
+  }, {
+    { name = 'buffer' }
+  })
+})
+
+-- Set configuration for specific filetype.
+cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+  }, {
+    { name = 'buffer' },
+  })
+})
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})
+
+require('nvim-tree').setup {
+  hijack_cursor = true,
+  open_on_setup = true,
+  actions = {
+    open_file = {
+      quit_on_open = true
+    }
+  }
+}
 require('lualine').setup {
   options = {
     -- theme = 'codedark'
@@ -41,17 +104,46 @@ require('lualine').setup {
   }
 }
 
-vim.g.sonokai_style = 'atlantis'
-vim.api.nvim_command("colorscheme sonokai")
-
--- require("nvim-lsp-installer").setup {}
-
 require("indent_blankline").setup {
   char = "▏",
 }
-require("toggleterm").setup{}
-require("bufferline").setup{
+require("toggleterm").setup {
+  direction = "float"
+}
+require("bufferline").setup {
   options = {
-    mode = "tabs"
+    -- buffer_close_icon = '',
+    show_buffer_close_icons = false,
+    show_close_icon = false,
+    offsets = {
+      {
+        filetype = "NvimTree",
+        text = "File Explorer",
+        text_align = "center"
+      }
+    }
   }
 }
+
+vim.g.sonokai_style = 'atlantis'
+vim.api.nvim_command("colorscheme sonokai")
+-- vim.api.nvim_command("highlight NvimTreeCursorLine guibg=blue")
+vim.api.nvim_command("highlight NvimTreeCursorLine guibg=blue")
+
+local two_space_indent_langs = { "lua", "javascript", "typescript", "javascriptreact", "typescriptreact", "javascript.jsx", "typescript.tsx", "css", "html" }
+for _, lang in pairs(two_space_indent_langs) do
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = lang,
+    command = "setlocal shiftwidth=2 softtabstop=2 expandtab"
+  })
+end
+
+vim.cmd [[autocmd bufenter * if (winnr("$") == 1 && &buftype == "nofile" && &filetype == "CHADTree") | q! | endif]]
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   nested = false,
+--   callback = function()
+--     if #vim.api.nvim_list_wins() == 1 and vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil then
+--       vim.cmd "quit"
+--     end
+--   end
+-- })

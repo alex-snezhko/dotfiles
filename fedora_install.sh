@@ -20,7 +20,7 @@ echo 'Input your OpenWeatherMap API key.'
 read -p 'API Key: ' apikey
 
 # keep a record of packages needed to be installed
-to_install='alacritty fish rofi pulseaudio-utils pavucontrol brightnessctl playerctl jetbrains-mono-fonts'
+to_install='alacritty fish rofi pulseaudio-utils pavucontrol brightnessctl playerctl jetbrains-mono-fonts ripgrep'
 # directories from repo that should be copied to .config
 to_copy='alacritty rofi'
 
@@ -32,7 +32,7 @@ elif [[ $selection == '2' ]]; then
     to_copy="$to_copy i3-gaps polybar"
 fi
 
-sudo dnf install $to_install
+sudo dnf install $to_install -y
 
 # install fontawesome 6 icon fonts
 curl https://use.fontawesome.com/releases/v6.1.1/fontawesome-free-6.1.1-desktop.zip -O
