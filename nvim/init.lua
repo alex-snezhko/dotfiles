@@ -33,14 +33,17 @@ cmp.setup({
     end,
   },
   window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
+    -- completion = cmp.config.window.bordered(),
+    -- documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
+    ['<C-j>'] = cmp.mapping.select_next_item(),
+    ['<C-k>'] = cmp.mapping.select_prev_item(),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
+    ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = cmp.config.sources({
@@ -83,7 +86,7 @@ require('nvim-tree').setup {
   open_on_setup = true,
   actions = {
     open_file = {
-      quit_on_open = true
+      -- quit_on_open = true
     }
   }
 }
@@ -106,31 +109,30 @@ require('lualine').setup {
 
 require("indent_blankline").setup {
   char = "▏",
+  show_trailing_blankline_indent = false
 }
 require("toggleterm").setup {
   direction = "float"
 }
-require("bufferline").setup {
-  options = {
-    -- buffer_close_icon = '',
-    show_buffer_close_icons = false,
-    show_close_icon = false,
-    offsets = {
-      {
-        filetype = "NvimTree",
-        text = "File Explorer",
-        text_align = "center"
-      }
-    }
-  }
-}
+-- require("bufferline").setup {
+--   options = {
+--     show_buffer_close_icons = false,
+--     show_close_icon = false,
+--     offsets = {
+--       {
+--         filetype = "NvimTree",
+--         text = "File Explorer",
+--         text_align = "center"
+--       }
+--     }
+--   }
+-- }
 
 vim.g.sonokai_style = 'atlantis'
 vim.api.nvim_command("colorscheme sonokai")
--- vim.api.nvim_command("highlight NvimTreeCursorLine guibg=blue")
 vim.api.nvim_command("highlight NvimTreeCursorLine guibg=blue")
 
-local two_space_indent_langs = { "lua", "javascript", "typescript", "javascriptreact", "typescriptreact", "javascript.jsx", "typescript.tsx", "css", "html" }
+local two_space_indent_langs = { "lua", "javascript", "typescript", "javascriptreact", "typescriptreact", "javascript.jsx", "typescript.tsx", "css", "sass", "scss", "html" }
 for _, lang in pairs(two_space_indent_langs) do
   vim.api.nvim_create_autocmd("FileType", {
     pattern = lang,
@@ -138,12 +140,13 @@ for _, lang in pairs(two_space_indent_langs) do
   })
 end
 
-vim.cmd [[autocmd bufenter * if (winnr("$") == 1 && &buftype == "nofile" && &filetype == "CHADTree") | q! | endif]]
--- vim.api.nvim_create_autocmd("BufEnter", {
---   nested = false,
---   callback = function()
---     if #vim.api.nvim_list_wins() == 1 and vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil then
---       vim.cmd "quit"
---     end
---   end
--- })
+-- vim.cmd [[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
+-- vim.cmd [[autocmd BufEnter * ++nested call timer_start(150, { tid -> execute("if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif") })]]
+vim.api.nvim_create_autocmd("WinEnter", {
+  nested = true,
+  callback = function()
+    if #vim.api.nvim_list_wins() == 1 and vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil then
+      vim.cmd "quit"
+    end
+  end
+})

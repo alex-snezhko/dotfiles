@@ -48,6 +48,15 @@ return require('packer').startup(function(use)
       }
     end
   }
+  use {
+    'rmagatti/auto-session',
+    config = function()
+      require('auto-session').setup {
+        log_level = 'info',
+        auto_session_suppress_dirs = {'~/', '~/Projects'}
+      }
+    end
+  }
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
@@ -60,7 +69,7 @@ return require('packer').startup(function(use)
     end
   }
   use 'RRethy/vim-illuminate'
-  use {'akinsho/bufferline.nvim', tag = "v2.*" }
+  -- use {'akinsho/bufferline.nvim', tag = "v2.*" }
   use {
     'akinsho/toggleterm.nvim',
     tag = 'v1.*',
