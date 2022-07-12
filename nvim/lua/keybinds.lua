@@ -9,16 +9,6 @@ map('n', '<leader>fs', ':Telescope live_grep<CR>', opts)
 
 -- Buffer-related commands
 map('n', '<leader>b', ':Telescope buffers<CR>', opts)
--- map('n', '<leader>ba', ':Telescope buffers<CR>', opts)
--- map('n', '<leader>bh', ':BufferLineCyclePrev<CR>', opts)
--- map('n', '<leader>bl', ':BufferLineCycleNext<CR>', opts)
--- map('n', '<leader>bmh', ':BufferLineMovePrev<CR>', opts)
--- map('n', '<leader>bml', ':BufferLineMoveNext<CR>', opts)
--- map('n', '<leader>bb', ':BufferLinePick<CR>', opts)
--- map('n', '<leader>bq', ':BufferLinePickClose<CR>', opts)
--- for buf_num=1,9 do
---   map('n', '<leader>b' .. buf_num, ':BufferLineGoToBuffer ' .. buf_num .. '<CR>', opts)
--- end
 
 -- Toggleterm-related commands
 map('n', '<leader>tt', ':ToggleTerm<CR>', opts)

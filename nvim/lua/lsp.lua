@@ -24,7 +24,7 @@ end
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-local servers = { 'sumneko_lua', 'pyright', 'cssls', 'cssmodules_ls', 'tsserver', 'bashls', 'html' }
+local servers = { 'sumneko_lua', 'pyright', 'cssls', 'cssmodules_ls', 'tsserver', 'bashls', 'html', 'svelte' }
 require('nvim-lsp-installer').setup {
   ensure_installed = servers
 }

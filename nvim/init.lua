@@ -96,6 +96,7 @@ require('lualine').setup {
     theme = 'onedark',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
+    disabled_filetypes = { 'NvimTree' }
   },
   sections = {
     lualine_a = {'mode'},
@@ -114,25 +115,12 @@ require("indent_blankline").setup {
 require("toggleterm").setup {
   direction = "float"
 }
--- require("bufferline").setup {
---   options = {
---     show_buffer_close_icons = false,
---     show_close_icon = false,
---     offsets = {
---       {
---         filetype = "NvimTree",
---         text = "File Explorer",
---         text_align = "center"
---       }
---     }
---   }
--- }
 
 vim.g.sonokai_style = 'atlantis'
 vim.api.nvim_command("colorscheme sonokai")
 vim.api.nvim_command("highlight NvimTreeCursorLine guibg=blue")
 
-local two_space_indent_langs = { "lua", "javascript", "typescript", "javascriptreact", "typescriptreact", "javascript.jsx", "typescript.tsx", "css", "sass", "scss", "html" }
+local two_space_indent_langs = { "lua", "javascript", "typescript", "javascriptreact", "typescriptreact", "javascript.jsx", "typescript.tsx", "css", "sass", "scss", "html", "svelte" }
 for _, lang in pairs(two_space_indent_langs) do
   vim.api.nvim_create_autocmd("FileType", {
     pattern = lang,
@@ -140,8 +128,11 @@ for _, lang in pairs(two_space_indent_langs) do
   })
 end
 
--- vim.cmd [[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
--- vim.cmd [[autocmd BufEnter * ++nested call timer_start(150, { tid -> execute("if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif") })]]
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = 'go',
+  command = "setlocal noexpandtab"
+})
+
 vim.api.nvim_create_autocmd("WinEnter", {
   nested = true,
   callback = function()
