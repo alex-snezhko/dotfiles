@@ -1,21 +1,29 @@
-local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
 
+local packer_bootstrap = ensure_packer()
+
 return require('packer').startup(function(use)
-  -- [[ Plugins Go Here ]]
   use 'wbthomason/packer.nvim'
+  -- LSP
   use {
-    'williamboman/nvim-lsp-installer',
-    'neovim/nvim-lspconfig'
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+    'neovim/nvim-lspconfig',
   }
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
-  -- [[ nvim-cmp setup ]]
+  -- nvim-cmp
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
@@ -32,16 +40,6 @@ return require('packer').startup(function(use)
     "folke/which-key.nvim",
     config = function()
       require("which-key").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    end
-  }
-  use {
-    'folke/trouble.nvim',
-    config = function()
-      require("trouble").setup {
         -- your configuration comes here
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
@@ -69,31 +67,26 @@ return require('packer').startup(function(use)
     end
   }
   use 'RRethy/vim-illuminate'
-  -- use {'akinsho/bufferline.nvim', tag = "v2.*" }
   use {
-    'akinsho/toggleterm.nvim',
-    tag = 'v1.*',
+    "akinsho/toggleterm.nvim",
+    tag = '*',
     config = function()
-      require("toggleterm").setup()
+      require("toggleterm").setup {
+        direction = "float"
+      }
     end
   }
   use 'kyazdani42/nvim-tree.lua'
-  -- use {
-  --   'ms-jpq/chadtree',
-  --   branch = 'chad',
-  --   run = 'python3 -m chadtree deps --nvim'
-  -- }
   use 'DanilaMihailov/beacon.nvim'               -- cursor jump
   use {
-    'nvim-lualine/lualine.nvim',                     -- statusline
-    -- requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    'nvim-lualine/lualine.nvim'                     -- statusline
   }
   use {
     'nvim-telescope/telescope.nvim',                 -- fuzzy finder
     requires = { {'nvim-lua/plenary.nvim'} }
   }
   use "lukas-reineke/indent-blankline.nvim"
-  use 'sainnhe/sonokai'
+  use "cpea2506/one_monokai.nvim"
 
   if packer_bootstrap then
     require('packer').sync()

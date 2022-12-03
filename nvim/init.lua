@@ -1,9 +1,11 @@
 vim.g.mapleader = " "
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 local packer_path = vim.fn.stdpath('config') .. '/site'
 vim.o.packpath = vim.o.packpath .. ',' .. packer_path
 
-require("keybinds")
+require("keybinds").setup()
 require("options")
 require("plugins")
 require("lsp")
@@ -12,121 +14,26 @@ require("neoscroll").setup {}
 require("nvim-autopairs").setup({
   disable_filetype = { "TelescopePrompt", "vim" }
 })
-require("nvim-treesitter.configs").setup {
-  ensure_installed = "all",
-  highlight = {
-    enable = true,
-    -- additional_vim_regex_highlighting = true
-  },
-  autotag = {
-    enable = true
-  },
-  context_commentstring = {
-    enable = true
-  }
-}
-local cmp = require'cmp'
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
-  },
-  window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-j>'] = cmp.mapping.select_next_item(),
-    ['<C-k>'] = cmp.mapping.select_prev_item(),
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-  }),
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' }
-  }, {
-    { name = 'buffer' }
-  })
-})
+-- require("toggleterm").setup {
+--   direction = "float"
+-- }
 
--- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
-  sources = cmp.config.sources({
-    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-  }, {
-    { name = 'buffer' },
-  })
-})
-
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = 'buffer' }
-  }
-})
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  })
-})
-
-require('nvim-tree').setup {
-  hijack_cursor = true,
-  open_on_setup = true,
-  actions = {
-    open_file = {
-      -- quit_on_open = true
-    }
-  }
-}
-require('lualine').setup {
-  options = {
-    -- theme = 'codedark'
-    theme = 'onedark',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = { 'NvimTree' }
-  },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  }
-}
+require("config.nvim-treesitter")
+require("config.nvim-cmp")
+require("config.nvim-tree")
+require("config.lualine")
 
 require("indent_blankline").setup {
   char = "▏",
-  show_trailing_blankline_indent = false
+  show_trailing_blankline_indent = false,
+  use_treesitter = true
 }
-require("toggleterm").setup {
-  direction = "float"
-}
+-- require("toggleterm").setup {
+--   direction = "float"
+-- }
 
-vim.g.sonokai_style = 'atlantis'
-vim.api.nvim_command("colorscheme sonokai")
+vim.cmd.colorscheme "one_monokai"
 vim.api.nvim_command("highlight NvimTreeCursorLine guibg=blue")
-
-local two_space_indent_langs = { "lua", "javascript", "typescript", "javascriptreact", "typescriptreact", "javascript.jsx", "typescript.tsx", "css", "sass", "scss", "html", "svelte" }
-for _, lang in pairs(two_space_indent_langs) do
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = lang,
-    command = "setlocal shiftwidth=2 softtabstop=2 expandtab"
-  })
-end
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = 'go',

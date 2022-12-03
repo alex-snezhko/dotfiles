@@ -23,6 +23,13 @@ opt.expandtab = true             -- bool: Use spaces instead of tabs
 opt.shiftwidth = 4               -- num:  Size of an indent
 opt.softtabstop = 4              -- num:  Number of spaces tabs count for in insert mode
 opt.tabstop = 4                  -- num:  Number of spaces tabs count for
+local two_space_indent_langs = { "lua", "javascript", "typescript", "javascriptreact", "typescriptreact", "javascript.jsx", "typescript.tsx", "css", "sass", "scss", "html", "svelte" }
+for _, lang in pairs(two_space_indent_langs) do
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = lang,
+    command = "setlocal shiftwidth=2 softtabstop=2 expandtab"
+  })
+end
 
 -- [[ Splits ]]
 opt.splitright = true            -- bool: Place new window to right of current one
