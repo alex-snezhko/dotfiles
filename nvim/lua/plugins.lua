@@ -34,7 +34,6 @@ return require('packer').startup(function(use)
 
   use 'kyazdani42/nvim-web-devicons'
   use 'tpope/vim-commentary'
-  -- use 'sbdchd/neoformat'
   use 'karb94/neoscroll.nvim'
   use {
     "folke/which-key.nvim",
@@ -72,7 +71,8 @@ return require('packer').startup(function(use)
     tag = '*',
     config = function()
       require("toggleterm").setup {
-        direction = "float"
+        direction = "horizontal",
+        open_mapping = [[<C-\>]]
       }
     end
   }
@@ -86,7 +86,7 @@ return require('packer').startup(function(use)
     requires = { {'nvim-lua/plenary.nvim'} }
   }
   use "lukas-reineke/indent-blankline.nvim"
-  use "cpea2506/one_monokai.nvim"
+  use 'navarasu/onedark.nvim'
 
   if packer_bootstrap then
     require('packer').sync()

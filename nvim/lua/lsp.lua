@@ -1,6 +1,6 @@
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local setup_lsp_keybinds = require('lua.keybinds').setup_lsp_keybinds
+local setup_lsp_keybinds = require('keybinds').setup_lsp_keybinds
 
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
@@ -24,6 +24,7 @@ local servers = {
   'sumneko_lua',
   'pyright',
   'ocamllsp',
+  'rust_analyzer'
 }
 
 require('mason').setup()

@@ -32,8 +32,9 @@ require("indent_blankline").setup {
 --   direction = "float"
 -- }
 
-vim.cmd.colorscheme "one_monokai"
-vim.api.nvim_command("highlight NvimTreeCursorLine guibg=blue")
+-- vim.cmd.colorscheme "one_monokai"
+-- vim.cmd.colorscheme "adwaita"
+vim.cmd.colorscheme "onedark"
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = 'go',
